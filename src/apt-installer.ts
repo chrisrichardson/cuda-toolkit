@@ -59,7 +59,7 @@ export async function aptInstall(
     // Install everything
     const packageName = `cuda-${version.major}-${version.minor}`
     core.debug(`Install package: ${packageName}`)
-    return await exec(`sudo apt-get -y install`, [packageName])
+    return await exec(`sudo apt-get -yq install`, [packageName])
   } else {
     // Only install specified packages
     const prefixedSubPackages = subPackages.map(
@@ -72,6 +72,6 @@ export async function aptInstall(
           `${nonCudaSubPackage}-${version.major}-${version.minor}`
       )
     core.debug(`Only install subpackages: ${versionedSubPackages}`)
-    return await exec(`sudo apt-get -y install`, versionedSubPackages)
+    return await exec(`sudo apt-get -yq install`, versionedSubPackages)
   }
 }
